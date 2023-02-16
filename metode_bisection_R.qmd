@@ -1,0 +1,68 @@
+---
+title: "Metode Bisection dengan R"
+author: "Abdur Rohman, Ph.D"
+format: pdf
+---
+
+```{r}
+# Contoh script untuk metode Bisection untuk mencari akar dari y = cos(x)-x
+# Prosedur bisection pada script ini mengikuti buku HELM
+# 31.4 Nonlinear Equations hlm. 73. Sebagian syntax pada script ini terinspirasi
+# dari http://theflyingkeyboard.net/algorithms/r-bisection-method/
+# Metode ini direvisi terakhir tanggal 6 Februari 2023.
+
+
+
+fungsiku <- function(x) {
+  # ini contoh fungsi yang dicari akarnya.Tentu saja boleh diubah ke fungsi lain.
+  y <- cos(x) - log(x)
+  return(y)
+}
+
+bsc <- function(fungsiku, x_kiri, x_kanan, toleransi) {
+  if (fungsiku(x_kiri) == 0 & fungsiku(x_kanan) == 0) {
+    return(cat("x yang menjadi akar y adalah ", x_kiri, "dan", x_kanan))
+  } else if (fungsiku(x_kiri) == 0 & fungsiku(x_kanan) != 0) {
+    return(cat("x yang menjadi akar y adalah ", x_kiri))
+  } else if (fungsiku(x_kiri) != 0 & fungsiku(x_kanan) == 0) {
+    return(cat("x yang menjadi akar y adalah ", x_kanan))
+  }
+  cek1 <- fungsiku(x_kiri) * fungsiku(x_kanan)
+  if (cek1 >= 0) {
+    cat("Pilih nilai batas yang lain sehingga nilai-nilai fungsi di kedua 
+          batas berbeda tanda.")
+  } else {
+    while (abs(x_kanan - x_kiri) > toleransi) {
+      tengah <- (x_kanan + x_kiri) / 2
+
+      print(paste0("x yang menjadi akar y adalah ", tengah))
+
+      cek2 <- fungsiku(tengah) * (fungsiku(x_kanan))
+
+      # Kemungkinan Pertama : akar tepat berada pada nilai tengah interval
+
+      if (fungsiku(tengah) == 0) {
+        return(paste0("x yang menjadi akar y adalah ", tengah))
+      } else
+
+      # Kemungkinan Kedua : akar berada antara nilai tengah dan batas atas
+
+      if (cek2 < 0) {
+        x_kiri <- tengah
+      }
+      # Kemungkinan ketiga: akar berada antara nilai tengah dan batas bawah
+      else {
+        x_kanan <- tengah
+      }
+    }
+  }
+}
+
+
+# fun1 = function(x) {x^2 - 8*x + 10}
+# bsc(fun1, 0, 3, 0.001)
+fun2 <- function(x) {
+  x^2 - 16
+}
+bsc(fun2, 0, 8, 0.001)
+```
