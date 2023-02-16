@@ -8,9 +8,7 @@ format: pdf
 # Contoh script untuk metode Bisection untuk mencari akar dari y = cos(x)-x
 # Prosedur bisection pada script ini mengikuti buku HELM
 # 31.4 Nonlinear Equations hlm. 73. https://nucinkis-lab.cc.ic.ac.uk/HELM/helm_workbooks.html
-# Sebagian syntax pada script ini terinspirasi
-# dari http://theflyingkeyboard.net/algorithms/r-bisection-method/
-# Metode ini direvisi terakhir tanggal 6 Februari 2023.
+# Sebagian syntax pada script ini terinspirasi dari http://theflyingkeyboard.net/algorithms/r-bisection-method/
 
 
 
